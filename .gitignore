@@ -1,0 +1,23 @@
+# ----------- temporary files
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ----------- compilation output
+
+bin
+build
+target
+logs
+.log
+
+# ----------- workspaces
+
+*.sublime-workspace
+.idea/workspace.xml
+.idea/artifacts
