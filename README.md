@@ -1,13 +1,23 @@
-webloc decompiler in GO
-=======================
+webloc
+======
+.webloc to .url converter in GO
+
+Recursively converts all files in path.
+
+~~
+Usage: webloc [options] [path]
+  -delete=false: delete .webloc files after conversion
+  -noop=false: decode urls, but do not change file system
+~~~
+
 
 Requirements
 ------------
-* GO 1.4.2
+* GO 1.4+
 
 
-Issues
-------
+Limitations
+-----------
 * Does not read resource forks, only data in plist file
 
 
@@ -19,8 +29,11 @@ References
 * http://www.peachpit.com/articles/article.aspx?p=1762250&seqNum=5
 
 
-Decompile binary weblocs
-========================
+Analyzing weblocs
+=================
+
+What do we have here?
+~~~
 hansolo:webloc daniel$ ls -l@
 total 56
 -rw-r--r--  1 daniel  staff  2143 Mar 14 12:45 README.md
@@ -35,9 +48,10 @@ drwxr-xr-x  3 daniel  staff   102 Mar 14 12:33 bin
 	com.apple.FinderInfo	  32
 	com.apple.ResourceFork	 454
 	com.apple.quarantine	  31
+~~~
 
-
-
+What's in it?
+~~~
 hansolo:~ daniel$ hexdump -C binary-plist.webloc
 00000000  62 70 6c 69 73 74 30 30  d1 01 02 53 55 52 4c 5f  |bplist00...SURL_|
 00000010  10 1a 68 74 74 70 3a 2f  2f 77 77 77 2e 6b 65 6b  |..http://www.kek|
@@ -45,9 +59,10 @@ hansolo:~ daniel$ hexdump -C binary-plist.webloc
 00000030  00 00 00 00 00 01 01 00  00 00 00 00 00 00 03 00  |................|
 00000040  00 00 00 00 00 00 00 00  00 00 00 00 00 00 2c     |..............,|
 0000004f
+~~~
 
-
-
+What's really in it?
+~~~
 hansolo:~ daniel$ derez binary-plist.webloc
 data 'drag' (128) {
     $"0000 0001 0000 0000 0000 0000 0000 0003"            /* ................ */
@@ -71,11 +86,14 @@ data 'urln' (256) {
     $"4D61 6320 4F53 2058 2066 696C 6520 6172"            /* Mac OS X file ar */
     $"6368 6976 6572"                                     /* chiver */
 };
+~~~
 
-
+Only the name?
+~~~
 hansolo:webloc daniel$ DeRez -e -only 'urln' binary-plist.webloc
 data 'urln' (256) {
     $"4B65 6B61 202D 2074 6865 2066 7265 6520"            /* Keka - the free  */
     $"4D61 6320 4F53 2058 2066 696C 6520 6172"            /* Mac OS X file ar */
     $"6368 6976 6572"                                     /* chiver */
 };
+~~~
