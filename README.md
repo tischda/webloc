@@ -4,7 +4,7 @@ webloc
 
 Recursively converts all files in path.
 
-~~~
+~~
 Usage: webloc [options] [path]
   -delete=false: delete .webloc files after conversion
   -noop=false: decode urls, but do not change file system
@@ -27,6 +27,7 @@ References
 * https://github.com/ggilder/weirdfs
 * http://www.macdisk.com/macforken.php
 * http://www.peachpit.com/articles/article.aspx?p=1762250&seqNum=5
+* http://hints.macworld.com/article.php?story=20040728185233128
 
 
 Analyzing weblocs
