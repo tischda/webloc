@@ -4,7 +4,7 @@ webloc
 
 Recursively converts all files in path.
 
-~~
+~~~
 Usage: webloc [options] [path]
   -delete=false: delete .webloc files after conversion
   -noop=false: decode urls, but do not change file system
