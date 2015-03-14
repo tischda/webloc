@@ -3,15 +3,12 @@ import (
     "path/filepath"
     "howett.net/plist"
     "fmt"
-    "bytes"
-    "io/ioutil"
     "os"
     "flag"
 )
 
 type weblocHeader struct {
     URL string `plist:"URL"`
-    URLN string `plist:"urln"`
 }
 
 func main() {
@@ -40,13 +37,14 @@ func walkpath(path string, f os.FileInfo, err error) error {
     return nil
 }
 
-func decode(filename string) {
+func decode(path string) {
     var data weblocHeader
 
-    buf, err := ioutil.ReadFile(filename)
+    f, err := os.Open(path)
     check(err)
+    defer f.Close()
 
-    decoder := plist.NewDecoder(bytes.NewReader([]byte(buf)))
+    decoder := plist.NewDecoder(f)
     check(decoder.Decode(&data))
     fmt.Println(data)
 }
