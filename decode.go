@@ -6,6 +6,7 @@ import (
 	"howett.net/plist"
 	"os"
 	"path/filepath"
+    "strings"
 )
 
 type weblocHeader struct {
@@ -45,7 +46,8 @@ func process(path string) {
 	fmt.Println(url)
 
 	if !noop {
-		writeUrl(path[:len(path)-len(".webloc")]+".url", url)
+        newPath := convertPath(path)
+		writeUrl(newPath, url)
 		if delete {
 			err := os.Remove(path)
 			check(err)
@@ -69,6 +71,12 @@ func check(e error) {
 	if e != nil {
 		panic(e)
 	}
+}
+
+func convertPath(path string) string {
+    newPath := path[:len(path)-len(".webloc")]+".url"
+    newPath = strings.Replace(newPath, "|", "-", -1)
+    return newPath
 }
 
 func writeUrl(path string, url string) {

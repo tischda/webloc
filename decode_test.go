@@ -20,3 +20,11 @@ func TestDecodeXML(t *testing.T) {
     }
 }
 
+func TestConvertPath(t *testing.T) {
+    path := "Spring4TW! | Josh Long | Talk Video | Parleys.com.webloc"
+    expected := "Spring4TW! - Josh Long - Talk Video - Parleys.com.url"
+    newPath := convertPath(path)
+    if newPath != expected {
+        t.Errorf("Expected: %q, actual: %q", expected, newPath)
+    }
+}
