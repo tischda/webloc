@@ -6,7 +6,6 @@ Requirements
 * GO 1.4.2
 
 
-
 Issues
 ------
 * Does not read resource forks, only data in plist file
@@ -16,10 +15,29 @@ References
 ----------
 * https://github.com/DHowett/go-plist
 * https://github.com/ggilder/weirdfs
+* http://www.macdisk.com/macforken.php
+* http://www.peachpit.com/articles/article.aspx?p=1762250&seqNum=5
 
 
 Decompile binary weblocs
 ========================
+hansolo:webloc daniel$ ls -l@
+total 56
+-rw-r--r--  1 daniel  staff  2143 Mar 14 12:45 README.md
+drwxr-xr-x  3 daniel  staff   102 Mar 14 12:33 bin
+-rwxr-xr-x@ 1 daniel  staff    79 Mar 14 10:43 binary-plist.webloc
+	com.apple.FinderInfo	  32
+	com.apple.ResourceFork	 536
+	com.apple.quarantine	  25
+-rw-r--r--  1 daniel  staff   550 Mar 14 12:42 decode.go
+-rw-r--r--  1 daniel  staff   675 Mar 14 10:47 webloc.iml
+-rw-r--r--@ 1 daniel  staff   247 Mar 14 10:43 xml-content.webloc
+	com.apple.FinderInfo	  32
+	com.apple.ResourceFork	 454
+	com.apple.quarantine	  31
+
+
+
 hansolo:~ daniel$ hexdump -C binary-plist.webloc
 00000000  62 70 6c 69 73 74 30 30  d1 01 02 53 55 52 4c 5f  |bplist00...SURL_|
 00000010  10 1a 68 74 74 70 3a 2f  2f 77 77 77 2e 6b 65 6b  |..http://www.kek|
@@ -27,7 +45,8 @@ hansolo:~ daniel$ hexdump -C binary-plist.webloc
 00000030  00 00 00 00 00 01 01 00  00 00 00 00 00 00 03 00  |................|
 00000040  00 00 00 00 00 00 00 00  00 00 00 00 00 00 2c     |..............,|
 0000004f
-hansolo:~
+
+
 
 hansolo:~ daniel$ derez binary-plist.webloc
 data 'drag' (128) {
