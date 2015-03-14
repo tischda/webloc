@@ -18,7 +18,7 @@ var noop bool
 
 func init() {
 	flag.BoolVar(&delete, "delete", false, "delete .webloc files after conversion")
-	flag.BoolVar(&noop, "noop", false, "decode urls, but do not change file system")
+	  flag.BoolVar(&noop, "noop", false, "decode urls, but do not change file system")
 	flag.Parse()
 }
 
