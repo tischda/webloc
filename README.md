@@ -15,6 +15,9 @@ Requirements
 ------------
 * GO 1.4+
 
+~~~
+go build -o bin/webloc
+~~~
 
 Limitations
 -----------
