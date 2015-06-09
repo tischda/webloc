@@ -5,19 +5,26 @@ webloc
 Recursively converts all files in path.
 
 ~~~
-Usage: webloc [options] [path]
+Usage: webloc.exe [options] path
+  path: the path to process
   -delete=false: delete .webloc files after conversion
   -noop=false: decode urls, but do not change file system
 ~~~
 
 
-Requirements
+Dependencies
 ------------
-* GO 1.4+
+* GO 1.4.2
+* `howett.net/plist`
+
+
+Install
+-------
 
 ~~~
-go build -o bin/webloc
+go get github.com/tischda/webloc
 ~~~
+
 
 Limitations
 -----------

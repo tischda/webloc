@@ -19,11 +19,17 @@ var noop bool
 func init() {
 	flag.BoolVar(&delete, "delete", false, "delete .webloc files after conversion")
 	flag.BoolVar(&noop, "noop", false, "decode urls, but do not change file system")
-	flag.Parse()
 }
 
 func main() {
 	root := flag.Arg(0)
+
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage: %s [options] path\n  path: the path to process\n", os.Args[0])
+		flag.PrintDefaults()
+	}
+	flag.Parse()
+
 	filepath.Walk(root, walkpath)
 }
 

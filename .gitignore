@@ -15,9 +15,14 @@ build
 target
 logs
 .log
+webloc
+webloc.exe
 
 # ----------- workspaces
 
 *.sublime-workspace
 .idea/workspace.xml
 .idea/artifacts
+.idea/codeStyleSettings.xml
+.idea/libraries
+.idea/misc.xml

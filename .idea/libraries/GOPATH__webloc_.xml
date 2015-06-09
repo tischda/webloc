@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="GOPATH &lt;webloc&gt;">
-    <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../go/src" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
