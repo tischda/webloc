@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+const version string = "1.0.0"
+
 type weblocHeader struct {
 	URL string `plist:"URL"`
 }
@@ -22,15 +24,18 @@ func init() {
 }
 
 func main() {
-	root := flag.Arg(0)
-
+	showVersion := flag.Bool("version", false, "print version")
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options] path\n  path: the path to process\n", os.Args[0])
 		flag.PrintDefaults()
 	}
 	flag.Parse()
+	if *showVersion {
+		fmt.Println("webloc version", version)
+		return
+	}
 
-	filepath.Walk(root, walkpath)
+	filepath.Walk(flag.Arg(0), walkpath)
 }
 
 func walkpath(path string, f os.FileInfo, err error) error {
