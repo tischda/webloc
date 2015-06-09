@@ -24,7 +24,7 @@ func init() {
 }
 
 func main() {
-	showVersion := flag.Bool("version", false, "print version")
+	showVersion := flag.Bool("version", false, "print version and exit")
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options] path\n  path: the path to process\n", os.Args[0])
 		flag.PrintDefaults()
