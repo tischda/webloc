@@ -1,6 +1,6 @@
 webloc
 ======
-.webloc to .url converter in GO
+`.webloc` to `.url` converter in [Go](https://www.golang.org).
 
 Recursively converts all files in path.
 
