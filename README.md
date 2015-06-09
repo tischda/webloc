@@ -1,5 +1,5 @@
-webloc
-======
+# webloc [![Build Status](https://travis-ci.org/tischda/webloc.svg?branch=master)](https://travis-ci.org/tischda/webloc)
+
 `.webloc` to `.url` converter in [Go](https://www.golang.org).
 
 Recursively converts all files in path.
@@ -12,27 +12,26 @@ Usage: webloc.exe [options] path
 ~~~
 
 
-Dependencies
-------------
+### Dependencies
+
 * GO 1.4.2
 * `howett.net/plist`
 
 
-Install
--------
+### Install
 
 ~~~
 go get github.com/tischda/webloc
 ~~~
 
 
-Limitations
------------
+### Limitations
+
 * Does not read resource forks, only data in plist file
 
 
-References
-----------
+### References
+
 * https://github.com/DHowett/go-plist
 * https://github.com/ggilder/weirdfs
 * http://www.macdisk.com/macforken.php
@@ -41,7 +40,7 @@ References
 
 
 Analyzing weblocs
-=================
+-----------------
 
 What do we have here?
 ~~~
