@@ -34,7 +34,10 @@ func main() {
 		fmt.Println("webloc version", version)
 		return
 	}
-
+	if flag.NArg() != 1 {
+		flag.Usage()
+		os.Exit(1)
+	}
 	filepath.Walk(flag.Arg(0), walkpath)
 }
 
