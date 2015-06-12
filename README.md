@@ -4,14 +4,6 @@
 
 Recursively converts all files in path.
 
-~~~
-Usage: webloc.exe [options] path
-  path: the path to process
-  -delete=false: delete .webloc files after conversion
-  -noop=false: decode urls, but do not change file system
-~~~
-
-
 ### Dependencies
 
 * GO 1.4.2
@@ -24,6 +16,22 @@ Usage: webloc.exe [options] path
 go get github.com/tischda/webloc
 ~~~
 
+### Usage
+
+~~~
+Usage: webloc.exe [options] path
+  path: the path to process
+  -delete=false: delete .webloc files after conversion
+  -noop=false: decode urls, but do not change file system
+~~~
+
+Example:
+
+~~~
+u:\>webloc.exe -noop data
+http://www.kekaosx.com/en/
+http://coffeescript.org/
+~~~
 
 ### Limitations
 
