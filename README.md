@@ -6,7 +6,10 @@ Recursively converts all files in path.
 
 ### Dependencies
 
-* GO 1.4.2
+Tested with GO 1.4.2 on Windows 7.
+
+You need:
+
 * `howett.net/plist`
 
 
@@ -50,7 +53,8 @@ http://coffeescript.org/
 Analyzing weblocs
 -----------------
 
-What do we have here?
+#### What do we have here?
+
 ~~~
 hansolo:webloc daniel$ ls -l@
 total 56
@@ -68,7 +72,8 @@ drwxr-xr-x  3 daniel  staff   102 Mar 14 12:33 bin
 	com.apple.quarantine	  31
 ~~~
 
-What's in it?
+#### What's in it?
+
 ~~~
 hansolo:~ daniel$ hexdump -C binary-plist.webloc
 00000000  62 70 6c 69 73 74 30 30  d1 01 02 53 55 52 4c 5f  |bplist00...SURL_|
@@ -79,7 +84,8 @@ hansolo:~ daniel$ hexdump -C binary-plist.webloc
 0000004f
 ~~~
 
-What's really in it?
+#### What's really in it?
+
 ~~~
 hansolo:~ daniel$ derez binary-plist.webloc
 data 'drag' (128) {
@@ -106,7 +112,8 @@ data 'urln' (256) {
 };
 ~~~
 
-Only the name?
+#### Only the name?
+
 ~~~
 hansolo:webloc daniel$ DeRez -e -only 'urln' binary-plist.webloc
 data 'urln' (256) {
