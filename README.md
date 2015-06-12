@@ -6,12 +6,7 @@ Recursively converts all files in path.
 
 ### Dependencies
 
-Tested with GO 1.4.2 on Windows 7.
-
-You need:
-
 * `howett.net/plist`
-
 
 ### Install
 
