@@ -8,6 +8,7 @@ os: Windows Server 2012 R2
 
 environment:
   GOPATH: c:\gopath
+  GOBIN: c:\gopath\bin
 
 init:
   - SET PATH=%GOPATH%\bin;%PATH%
