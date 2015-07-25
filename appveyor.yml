@@ -23,12 +23,12 @@ install:
 
 build_script:
   - go get
-  - go build -o webloc.exe
+  - go build -ldflags "-s" -o webloc.exe
 
 test_script:
+  - webloc.exe -version
   - go test -v -cover
   - go test -v | go2xunit -xunitnet > xunit-report.xml
-  - webloc.exe -version
   - webloc.exe data
 
 artifacts:
