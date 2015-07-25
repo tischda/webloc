@@ -23,7 +23,7 @@ install:
 
 build_script:
   - go get
-  - go build -ldflags "-s" -o webloc.exe
+  - build.bat
 
 test_script:
   - webloc.exe -version
