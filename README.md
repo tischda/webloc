@@ -6,7 +6,7 @@ Recursively converts all files in path.
 
 ### Dependencies
 
-* `howett.net/plist`
+* `github.com/tischda/go-plist`
 
 ### Install
 
