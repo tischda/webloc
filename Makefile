@@ -4,14 +4,17 @@
 # Compiler: GO 1.4.2
 # 
 
-build: fmt
+build: get
 	go build -ldflags "-X main.version `git describe --tags` -s"
+
+get:
+	go get
+
+test: fmt
+	go test -v -cover
 
 fmt:
 	go fmt
-
-test:
-	go test -v -cover
 
 install:
 	go install -ldflags "-X main.version `git describe --tags` -s"
