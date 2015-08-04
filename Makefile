@@ -17,7 +17,7 @@ fmt:
 	go fmt
 
 install:
-	go install -ldflags "-X main.version `git describe --tags` -s"
+	go install -a -ldflags "-X main.version `git describe --tags` -s"
 
 clean:
 	go clean
