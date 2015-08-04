@@ -1,5 +1,3 @@
-version: "1.0.0-{build}"
-
 branches:
   only:
     - master
@@ -8,7 +6,6 @@ os: Windows Server 2012 R2
 
 environment:
   GOPATH: c:\gopath
-  GOBIN: c:\gopath\bin
 
 init:
   - SET PATH=%GOPATH%\bin;%PATH%
@@ -18,13 +15,12 @@ install:
   - go version
   - go env
   - mkdir %GOPATH%
-  - go get -u golang.org/x/tools/cmd/cover
   - go get -u github.com/tischda/go2xunit
+  - go get -u github.com/tischda/go-plist
 
 build_script:
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - go get
-  - for /f "delims=" %a in ('git describe --tags') do @set version=%a
+  - for /f "delims=" %%a in ('git describe --tags') do @set version=%%a
+  - ps: Update-AppveyorBuild -Version $env:version
   - go build -ldflags "-X main.version %version% -s"
 
 test_script:
