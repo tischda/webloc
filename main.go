@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"howett.net/plist"
+	"github.com/tischda/go-plist"
 	"os"
 	"path/filepath"
 	"strings"
@@ -19,28 +19,29 @@ type weblocHeader struct {
 
 var delete bool
 var noop bool
+var showVersion bool
 
 func init() {
 	flag.BoolVar(&delete, "delete", false, "delete .webloc files after conversion")
 	flag.BoolVar(&noop, "noop", false, "decode urls, but do not change file system")
+	flag.BoolVar(&showVersion, "version", false, "print version and exit")
 }
 
 func main() {
-	showVersion := flag.Bool("version", false, "print version and exit")
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options] path\n  path: the path to process\n", os.Args[0])
 		flag.PrintDefaults()
 	}
 	flag.Parse()
-	if *showVersion {
+	if showVersion {
 		fmt.Println("webloc version", version)
-		return
+	} else {
+		if flag.NArg() != 1 {
+			flag.Usage()
+			os.Exit(1)
+		}
+		filepath.Walk(flag.Arg(0), walkpath)
 	}
-	if flag.NArg() != 1 {
-		flag.Usage()
-		os.Exit(1)
-	}
-	filepath.Walk(flag.Arg(0), walkpath)
 }
 
 func walkpath(path string, f os.FileInfo, err error) error {

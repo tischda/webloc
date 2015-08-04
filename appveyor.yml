@@ -22,8 +22,10 @@ install:
   - go get -u github.com/tischda/go2xunit
 
 build_script:
+  - cd %APPVEYOR_BUILD_FOLDER%
   - go get
-  - build.bat
+  - for /f "delims=" %a in ('git describe --tags') do @set version=%a
+  - go build -ldflags "-X main.version %version% -s"
 
 test_script:
   - webloc.exe -version
