@@ -2,7 +2,7 @@ language: go
 go:
     - 1.4.2
 script:
-    - make test
     - make build
+    - make test
     - ./webloc -version
     - ./webloc data
