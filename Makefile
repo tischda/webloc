@@ -1,23 +1,38 @@
-#
-# Makefile for GO utilites
-# 
-# Compiler: GO 1.5
-# 
+# ---------------------------------------------------------------------------
+# Makefile for GO utilities
+# ---------------------------------------------------------------------------
+
+PROJECT_DIR=$(notdir $(shell pwd))
+
+BUILD_TAG=`git describe --tags 2>/dev/null`
+LDFLAGS=-ldflags "-X main.version=${BUILD_TAG} -s -w"
+
+all: get build
 
 build: get
-	go build -ldflags "-X main.version=`git describe --tags` -s"
+	go build ${LDFLAGS}
 
 get:
 	go get
 
-test: fmt
+test: fmt vet
 	go test -v -cover
+
+cover:
+	go test -coverprofile=coverage.out
+	go tool cover -html=coverage.out
 
 fmt:
 	go fmt
 
+vet:
+	go vet -v
+
 install:
-	go install -a -ldflags "-X main.version=`git describe --tags` -s"
+	go install -a ${LDFLAGS} ./...
+
+dist: clean build
+	upx -9 ${PROJECT_DIR}.exe
 
 clean:
 	go clean
