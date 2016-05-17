@@ -29,7 +29,7 @@ vet:
 	go vet -v
 
 install:
-	go install -a ${LDFLAGS} ./...
+	go install ${LDFLAGS} ./...
 
 dist: clean build
 	upx -9 ${PROJECT_DIR}.exe
