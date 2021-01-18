@@ -15,6 +15,7 @@ install:
   - go version
   - go env
   - mkdir %GOPATH%
+  # This is not a depenency but a test resport filter
   - set GO111MODULE=off
   - go get github.com/tischda/go2xunit
   - set GO111MODULE=on
@@ -27,8 +28,7 @@ build_script:
 test_script:
   - webloc.exe -version
   - go test -v -cover
-  - dir %GOPATH%\bin\go2xunit.exe
-  - go test -v | %GOPATH%\bin\go2xunit.exe -xunitnet > xunit-report.xml
+  - go test -v | go2xunit.exe -xunitnet > xunit-report.xml
   - webloc.exe data
 
 artifacts:
