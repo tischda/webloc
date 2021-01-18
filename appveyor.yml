@@ -15,7 +15,9 @@ install:
   - go version
   - go env
   - mkdir %GOPATH%
-  - GO111MODULE=off go get github.com/tischda/go2xunit
+  - set GO111MODULE=off
+  - go get github.com/tischda/go2xunit
+  - set GO111MODULE=
 
 build_script:
   - for /f "delims=" %%a in ('git describe --tags') do @set version=%%a
