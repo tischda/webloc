@@ -20,7 +20,7 @@ install:
 build_script:
   - for /f "delims=" %%a in ('git describe --tags') do @set version=%%a
   - ps: Update-AppveyorBuild -Version $env:version
-  - go build -ldflags=all="-X main.version=%version% -s -w"
+  - go build -mod vendor -ldflags=all="-X main.version=%version% -s -w"
 
 test_script:
   - webloc.exe -version
