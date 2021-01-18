@@ -2,7 +2,7 @@ branches:
   only:
     - master
 
-os: Windows Server 2012 R2
+os: Windows Server 2019
 
 environment:
   GOPATH: c:\gopath
@@ -25,7 +25,8 @@ build_script:
 test_script:
   - webloc.exe -version
   - go test -v -cover
-  - go test -v | go2xunit -xunitnet > xunit-report.xml
+  - dir %GOPATH%\bin\go2xunit.exe
+  - go test -v | %GOPATH%\bin\go2xunit.exe -xunitnet > xunit-report.xml
   - webloc.exe data
 
 artifacts:
