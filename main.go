@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/tischda/go-plist"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"howett.net/plist"
 )
 
 // http://technosophos.com/2014/06/11/compile-time-string-in-go.html
@@ -22,7 +23,7 @@ var noop bool
 var showVersion bool
 
 func init() {
-	flag.BoolVar(&delete, "delete", false, "delete .webloc files after conversion")
+	flag.BoolVar(&delete, "delete", true, "delete .webloc files after conversion")
 	flag.BoolVar(&noop, "noop", false, "decode urls, but do not change file system")
 	flag.BoolVar(&showVersion, "version", false, "print version and exit")
 }
@@ -48,12 +49,14 @@ func walkpath(path string, f os.FileInfo, err error) error {
 	if err != nil {
 		return err
 	}
-	matched, err := filepath.Match("*.webloc", f.Name())
-	if err != nil {
-		return err
-	}
-	if matched {
-		process(path)
+	if !strings.HasPrefix(f.Name(), ".") {
+		matched, err := filepath.Match("*.webloc", f.Name())
+		if err != nil {
+			return err
+		}
+		if matched {
+			process(path)
+		}
 	}
 	return nil
 }
@@ -91,8 +94,13 @@ func check(e error) {
 }
 
 func convertPath(path string) string {
+	// change extension
 	newPath := path[:len(path)-len(".webloc")] + ".url"
-	newPath = strings.Replace(newPath, "|", "-", -1)
+
+	// remove forbidden characters
+	r := strings.NewReplacer("|", "_", ":", "_")
+	newPath = r.Replace(newPath)
+
 	return newPath
 }
 

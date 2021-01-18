@@ -6,7 +6,7 @@ Recursively converts all files in path.
 
 ### Dependencies
 
-* `github.com/tischda/go-plist`
+* `howett.net/plist`
 
 ### Install
 
@@ -19,7 +19,7 @@ go get github.com/tischda/webloc
 ~~~
 Usage: webloc.exe [options] path
   path: the path to process
-  -delete=false: delete .webloc files after conversion
+  -delete=true: delete .webloc files after conversion
   -noop=false: decode urls, but do not change file system
 ~~~
 
@@ -28,6 +28,7 @@ Example:
 ~~~
 u:\>webloc.exe -noop data
 http://www.kekaosx.com/en/
+https://www.maketecheasier.com/fix-home-end-button-for-external-keyboard-mac/
 http://coffeescript.org/
 ~~~
 

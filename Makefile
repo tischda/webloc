@@ -4,19 +4,19 @@
 
 PROJECT_DIR=$(notdir $(shell pwd))
 
-BUILD_TAG=`git describe --tags 2>/dev/null`
-LDFLAGS=-ldflags "all=-X main.version=${BUILD_TAG} -s -w"
+BUILD_TAG=$(shell git describe --tags)
+LDFLAGS=all=-ldflags "-X main.version=${BUILD_TAG} -s -w"
 
 all: get build
 
-build: get
-	go build ${LDFLAGS}
+build:
+	go build -mod vendor ${LDFLAGS}
 
 get:
 	go get
 
 test: fmt vet
-	go test -v -cover
+	go test -mod vendor -v -cover
 
 cover:
 	go test -coverprofile=coverage.out
