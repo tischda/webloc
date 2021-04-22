@@ -98,7 +98,7 @@ func convertPath(path string) string {
 	newPath := path[:len(path)-len(".webloc")] + ".url"
 
 	// remove forbidden characters
-	r := strings.NewReplacer("|", "_", ":", "_")
+	r := strings.NewReplacer("|", "_", ":", "_", "?", "_", "<", "_", ">", "_", "*", "_", "\"", "_", "\\", "_")
 	newPath = r.Replace(newPath)
 
 	return newPath
