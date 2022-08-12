@@ -5,22 +5,16 @@ branches:
 image: Visual Studio 2019
 
 environment:
-  GOPATH: c:\gopath
+  GOPATH: C:\gopath
+  GOPROXY: https://proxy.golang.org  
 
 init:
   - SET PATH=%GOPATH%\bin;%PATH%
-  - git config --global core.autocrlf input
 
 install:
   - go version
   - go env
-  - mkdir %GOPATH%
-  # This is not a dependency but a test report filter...
-  # WARNING: behaviour will change in go 1.16
-  # cf. https://stackoverflow.com/questions/24878737/what-is-the-difference-between-go-get-and-go-install
-  - set GO111MODULE=off
-  - go get github.com/tischda/go2xunit
-  - set GO111MODULE=on
+  - go install github.com/tebeka/go2xunit@latest
 
 build_script:
   - for /f "delims=" %%a in ('git describe --tags') do @set version=%%a
