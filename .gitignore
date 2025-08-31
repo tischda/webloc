@@ -1,2 +1,4 @@
 *.exe
-*.url
+coverage.out
+dist/
+releaseinfo

@@ -1,8 +1,0 @@
-language: go
-go:
-    - 1.16.3
-script:
-    - make build
-    - make test
-    - ./webloc -version
-    - ./webloc data
