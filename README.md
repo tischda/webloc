@@ -1,4 +1,8 @@
-# webloc [![Build Status](https://travis-ci.org/tischda/webloc.svg?branch=master)](https://travis-ci.org/tischda/webloc)
+[![Build Status](https://github.com/tischda/webloc/actions/workflows/build.yml/badge.svg)](https://github.com/tischda/webloc/actions/workflows/build.yml)
+[![Test Status](https://github.com/tischda/webloc/actions/workflows/test.yml/badge.svg)](https://github.com/tischda/webloc/actions/workflows/test.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tischda/webloc)](https://goreportcard.com/report/github.com/tischda/webloc)
+
+# webloc
 
 `.webloc` to `.url` converter in [Go](https://www.golang.org).
 
@@ -11,7 +15,7 @@ Recursively converts all files in path.
 ### Install
 
 ~~~
-go get github.com/tischda/webloc
+go install github.com/tischda/webloc@latest
 ~~~
 
 ### Usage
