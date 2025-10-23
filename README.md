@@ -1,6 +1,10 @@
 [![Build Status](https://github.com/tischda/webloc/actions/workflows/build.yml/badge.svg)](https://github.com/tischda/webloc/actions/workflows/build.yml)
 [![Test Status](https://github.com/tischda/webloc/actions/workflows/test.yml/badge.svg)](https://github.com/tischda/webloc/actions/workflows/test.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/tischda/webloc)](https://goreportcard.com/report/github.com/tischda/webloc)
+[![Coverage Status](https://coveralls.io/repos/tischda/webloc/badge.svg)](https://coveralls.io/r/tischda/webloc)
+[![Linter Status](https://github.com/tischda/webloc/actions/workflows/linter.yml/badge.svg)](https://github.com/tischda/webloc/actions/workflows/linter.yml)
+[![License](https://img.shields.io/github/license/tischda/webloc)](/LICENSE)
+[![Release](https://img.shields.io/github/release/tischda/webloc.svg)](https://github.com/tischda/webloc/releases/latest)
+
 
 # webloc
 

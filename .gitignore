@@ -1,4 +1,5 @@
-*.exe
+﻿*.exe
 coverage.out
 dist/
 releaseinfo
+resource*.syso
