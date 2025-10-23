@@ -43,7 +43,7 @@ func decode(path string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
+	defer f.Close() // nolint:errcheck
 
 	decoder := plist.NewDecoder(f)
 	err = decoder.Decode(&data)
@@ -73,7 +73,7 @@ func writeUrl(path string, url string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
+	defer f.Close() // nolint:errcheck
 
 	_, err = f.WriteString("[InternetShortcut]\nURL=" + url)
 	if err != nil {
