@@ -12,36 +12,37 @@
 
 Recursively converts all files in path.
 
-### Dependencies
+## Dependencies
 
 * `howett.net/plist`
 
-### Install
+## Install
 
 ~~~
 go install github.com/tischda/webloc@latest
 ~~~
 
-### Usage
+## Usage
 
 ~~~
 Usage: webloc [OPTIONS] <path>
 
 OPTIONS:
   -d, --delete
-                delete .webloc files after conversion (default: true)
+          delete .webloc files after conversion (default: true)
   -n, --noop
-                decode urls, but do not change files
+          decode urls, but do not change files
   -q, --quiet
-                suppress non-error output
+          suppress non-error output
   -vv, --verbose
-                enable verbose logging
+          enable verbose logging
   -?, --help
-        display this help message
+          display this help message
   -v, --version
-        print version and exit~~~
+          print version and exit
+~~~
 
-Example:
+## Example
 
 ~~~
 u:\>webloc.exe -noop data
@@ -52,12 +53,12 @@ http://coffeescript.org/
 --noop: No file changes were made.
 ~~~
 
-### Limitations
+## Limitations
 
 * Does not read resource forks, only data in plist file
 
 
-### References
+## References
 
 * https://github.com/DHowett/go-plist
 * https://github.com/ggilder/weirdfs
@@ -69,7 +70,7 @@ http://coffeescript.org/
 Analyzing weblocs
 -----------------
 
-#### What do we have here?
+### What do we have here?
 
 ~~~
 hansolo:webloc daniel$ ls -l@
@@ -88,7 +89,7 @@ drwxr-xr-x  3 daniel  staff   102 Mar 14 12:33 bin
 	com.apple.quarantine	  31
 ~~~
 
-#### What's in it?
+### What's in it?
 
 ~~~
 hansolo:~ daniel$ hexdump -C binary-plist.webloc
@@ -100,7 +101,7 @@ hansolo:~ daniel$ hexdump -C binary-plist.webloc
 0000004f
 ~~~
 
-#### What's really in it?
+### What's really in it?
 
 ~~~
 hansolo:~ daniel$ derez binary-plist.webloc
@@ -128,7 +129,7 @@ data 'urln' (256) {
 };
 ~~~
 
-#### Only the name?
+### Only the name?
 
 ~~~
 hansolo:webloc daniel$ DeRez -e -only 'urln' binary-plist.webloc

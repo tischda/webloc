@@ -58,17 +58,17 @@ Recursively converts all .webloc files in path to .url files.
 
 OPTIONS:
   -d, --delete
-		delete .webloc files after conversion (default: true)
+          delete .webloc files after conversion (default: true)
   -n, --noop
-		decode urls, but do not change files
+          decode urls, but do not change files
   -q, --quiet
-		suppress non-error output
+          suppress non-error output
   -vv, --verbose
-		enable verbose logging
+          enable verbose logging
   -?, --help
-        display this help message
+          display this help message
   -v, --version
-        print version and exit
+          print version and exit
 
 EXAMPLES:`)
 
