@@ -25,11 +25,21 @@ go install github.com/tischda/webloc@latest
 ### Usage
 
 ~~~
-Usage: webloc.exe [options] path
-  path: the path to process
-  -delete=true: delete .webloc files after conversion
-  -noop=false: decode urls, but do not change file system
-~~~
+Usage: webloc [OPTIONS] <path>
+
+OPTIONS:
+  -d, --delete
+                delete .webloc files after conversion (default: true)
+  -n, --noop
+                decode urls, but do not change files
+  -q, --quiet
+                suppress non-error output
+  -vv, --verbose
+                enable verbose logging
+  -?, --help
+        display this help message
+  -v, --version
+        print version and exit~~~
 
 Example:
 
@@ -38,6 +48,8 @@ u:\>webloc.exe -noop data
 http://www.kekaosx.com/en/
 https://www.maketecheasier.com/fix-home-end-button-for-external-keyboard-mac/
 http://coffeescript.org/
+
+--noop: No file changes were made.
 ~~~
 
 ### Limitations

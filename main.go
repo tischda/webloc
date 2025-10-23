@@ -7,8 +7,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"howett.net/plist"
 )
 
 // https://goreleaser.com/cookbooks/using-main.version/
@@ -23,6 +21,8 @@ var (
 type Config struct {
 	delete  bool
 	noop    bool
+	quiet   bool
+	verbose bool
 	help    bool
 	version bool
 }
@@ -33,6 +33,10 @@ func initFlags() *Config {
 	flag.BoolVar(&cfg.delete, "delete", true, "delete .webloc files after conversion")
 	flag.BoolVar(&cfg.noop, "n", false, "")
 	flag.BoolVar(&cfg.noop, "noop", false, "decode urls, but do not change file system")
+	flag.BoolVar(&cfg.quiet, "q", false, "")
+	flag.BoolVar(&cfg.quiet, "quiet", false, "suppress non-error output")
+	flag.BoolVar(&cfg.verbose, "vv", false, "")
+	flag.BoolVar(&cfg.verbose, "verbose", false, "verbose logging")
 	flag.BoolVar(&cfg.help, "?", false, "")
 	flag.BoolVar(&cfg.help, "help", false, "displays this help message")
 	flag.BoolVar(&cfg.version, "v", false, "")
@@ -57,6 +61,10 @@ OPTIONS:
 		delete .webloc files after conversion (default: true)
   -n, --noop
 		decode urls, but do not change files
+  -q, --quiet
+		suppress non-error output
+  -vv, --verbose
+		enable verbose logging
   -?, --help
         display this help message
   -v, --version
@@ -87,6 +95,7 @@ EXAMPLES:`)
 		os.Exit(1)
 	}
 
+	// process path recursively
 	walkpath := func(path string, f os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -107,61 +116,7 @@ EXAMPLES:`)
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func process(path string, cfg *Config) {
-	url := decode(path)
-	fmt.Println(url)
-
-	if !cfg.noop {
-		newPath := convertPath(path)
-		writeUrl(newPath, url)
-		if cfg.delete {
-			err := os.Remove(path)
-			if err != nil {
-				log.Fatal(err)
-			}
-		}
-	}
-}
-
-func decode(path string) string {
-	var data weblocHeader
-
-	f, err := os.Open(path)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer f.Close()
-
-	decoder := plist.NewDecoder(f)
-	err = decoder.Decode(&data)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return data.URL
-}
-
-func convertPath(path string) string {
-	// change extension
-	newPath := path[:len(path)-len(".webloc")] + ".url"
-
-	// remove forbidden characters
-	r := strings.NewReplacer("|", "_", ":", "_", "?", "_", "<", "_", ">", "_", "*", "_", "\"", "_", "\\", "_")
-	newPath = r.Replace(newPath)
-
-	return newPath
-}
-
-func writeUrl(path string, url string) {
-	f, err := os.Create(path)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer f.Close()
-
-	_, err = f.WriteString("[InternetShortcut]\nURL=" + url)
-	if err != nil {
-		log.Fatal(err)
+	if cfg.noop && !cfg.quiet {
+		fmt.Println("\n--noop: No file changes were made.")
 	}
 }

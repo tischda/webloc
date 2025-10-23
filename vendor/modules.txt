@@ -1,3 +1,3 @@
-# howett.net/plist v0.0.0-20201203080718-1454fab16a06
-## explicit
+# howett.net/plist v1.0.1
+## explicit; go 1.12
 howett.net/plist

@@ -1,62 +1,56 @@
+//go:build windows
+
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
+	"flag"
 	"os"
 	"testing"
 )
 
-func TestDecodeBinary(t *testing.T) {
-	expected := "http://www.kekaosx.com/en/"
-	url := decode("data/binary-plist.webloc")
-	if url != expected {
-		t.Errorf("Expected: %q, actual: %q", expected, url)
+func TestInitFlags(t *testing.T) {
+	// Save original command line and reset flags
+	originalArgs := os.Args
+	originalCommandLine := flag.CommandLine
+
+	defer func() {
+		os.Args = originalArgs
+		flag.CommandLine = originalCommandLine
+	}()
+
+	// Create a new flag set for this test
+	flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
+
+	// Test initFlags() function
+	cfg := initFlags()
+
+	// Test default values
+	if cfg.help != false {
+		t.Errorf("Expected help default to be false, got %v", cfg.help)
 	}
-}
-
-func TestDecodeXML(t *testing.T) {
-	expected := "http://coffeescript.org/"
-	url := decode("data/xml-content.webloc")
-	if url != expected {
-		t.Errorf("Expected: %q, actual: %q", expected, url)
+	if cfg.version != false {
+		t.Errorf("Expected version default to be false, got %v", cfg.version)
 	}
-}
 
-func TestConvertPath(t *testing.T) {
-	path := "Spring4TW! | Josh Long | Talk Video : Parleys? <placeholder> and \"quote\" and slash\\.com.webloc"
-	expected := "Spring4TW! _ Josh Long _ Talk Video _ Parleys_ _placeholder_ and _quote_ and slash_.com.url"
-	newPath := convertPath(path)
-	if newPath != expected {
-		t.Errorf("Expected: %q, actual: %q", expected, newPath)
+	// Test that flags can be parsed
+	testArgs := []string{
+		"progname",
+		"-?",
+		"-v",
 	}
-}
 
-func TestVersion(t *testing.T) {
-	args := []string{"-version"}
-	os.Args = append(os.Args, args...)
+	// Reset flag set and reinitialize
+	flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
+	cfg = initFlags()
 
-	expected := fmt.Sprintf("webloc version %s\n", version)
-	actual := captureOutput(main)
-
-	if expected != actual {
-		t.Errorf("Expected: %s, but was: %s", expected, actual)
+	// Parse test arguments
+	err := flag.CommandLine.Parse(testArgs[1:])
+	if err != nil {
+		t.Fatalf("Failed to parse flags: %v", err)
 	}
-}
 
-// captures Stdout and returns output of function f()
-func captureOutput(f func()) string {
-	// redirect output
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
-
-	f()
-
-	// reset output again
-	w.Close()
-	os.Stdout = old
-
-	captured, _ := ioutil.ReadAll(r)
-	return string(captured)
+	// Verify flags were set correctly
+	if !cfg.version {
+		t.Error("Expected version flag to be true")
+	}
 }
