@@ -39,11 +39,6 @@ tasks:
     cmds:
       - go test -v -cover ./...
 
-  watch:
-    desc: Watch for modifications in go files and rebuild if changed
-    cmds:
-      - watchexec.exe --quiet --postpone --exts go task build
-
   cover:
     desc: Generate and view coverage report
     cmds:
@@ -87,6 +82,7 @@ tasks:
       - rm -f releaseinfo
       - rm -f coverage.out
       - rm -f resource_*.syso
+      - rm -f fast-compile.cmd
 
   version:
     desc: Show version information

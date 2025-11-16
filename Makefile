@@ -54,10 +54,6 @@ goversioninfo:
 test:
 	go test -v -cover ./...
 
-## watch: watch for modifications in go files and rebuild if changed
-watch:
-	watchexec.exe --quiet --postpone --exts go make build
-
 ## cover: run tests and show coverage report in browser
 cover:
 	go test -coverprofile=coverage.out
@@ -97,6 +93,7 @@ clean:
 	rm -f coverage.out
 	rm -f releaseinfo
 	rm -f resource_*.syso
+	rm -f fast-compile.cmd
 
 ## version: show version info
 version:
