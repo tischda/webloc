@@ -19,11 +19,18 @@ VER_BUILD = 0  # Set default build number if needed
 
 MAKEFLAGS += --no-print-directory
 
+## This is faster than extracting variables from git each time
+FASTBUILD_CMD=go build -ldflags='-s -w -X main.name=timer -X main.version=v1.0.0-dirty -X main.date=$(BUILD_DATE) -X main.commit=12345'
+
 all: dist
 
 ## build: build project
 build: goversioninfo
 	go build $(LDFLAGS)
+
+## watch: watch for changes and rebuild (a first build is necessary to create .syso files)
+watch: build
+	@start watchexec.exe --postpone --timings --exts go \""$(FASTBUILD_CMD)"\" &
 
 goversioninfo:
 	@goversioninfo -product-name $(PROJECT_NAME) \
@@ -93,7 +100,6 @@ clean:
 	rm -f coverage.out
 	rm -f releaseinfo
 	rm -f resource_*.syso
-	rm -f fast-compile.cmd
 
 ## version: show version info
 version:

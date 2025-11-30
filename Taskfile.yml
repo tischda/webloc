@@ -19,6 +19,7 @@ vars:
     sh: bash -c 'echo {{.XYZ_VERSION}} | cut -d. -f3'
   VER_BUILD: "0"
   LDFLAGS: -ldflags=all="-s -w -X \'main.name={{.PROJECT_NAME}}\' -X \'main.version={{.VERSION}}\' -X \'main.date={{.BUILD_DATE}}\' -X \'main.commit={{.GIT_COMMIT}}\'"
+  FASTBUILD_CMD: go build -ldflags='-s -w -X main.name=timer -X main.version=v1.0.0-dirty -X main.date={{.BUILD_DATE}} -X main.commit=12345'
 
 tasks:
   build:
@@ -26,6 +27,12 @@ tasks:
     cmds:
       - task: goversioninfo
       - go build {{.LDFLAGS}}
+
+  watch:
+    desc: Watch for changes and rebuild (a first build is necessary to create .syso files)
+    cmds:
+      - task: build
+      - cmd /c start watchexec.exe --postpone --timings --exts go \""{{.FASTBUILD_CMD}}"\"
 
   goversioninfo:
     desc: Build go version information
@@ -82,7 +89,6 @@ tasks:
       - rm -f releaseinfo
       - rm -f coverage.out
       - rm -f resource_*.syso
-      - rm -f fast-compile.cmd
 
   version:
     desc: Show version information
