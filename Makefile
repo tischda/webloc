@@ -4,7 +4,7 @@
 # Escape '#' and '[' characters with '\', and '$' characters with '$$'
 # ---------------------------------------------------------------------------
 
-PROJECT_NAME=$(shell git rev-parse --show-toplevel | xargs basename )
+PROJECT_NAME=$(shell basename $$(pwd))
 VERSION=$(shell git describe --tags --always --dirty 2>/dev/null || echo "1.0.0-dev")
 BUILD_DATE=$(shell date -u "+%Y-%m-%dT%H:%M:%SZ")
 GIT_COMMIT=$(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
@@ -20,7 +20,7 @@ VER_BUILD = 0  # Set default build number if needed
 MAKEFLAGS += --no-print-directory
 
 ## This is faster than extracting variables from git each time
-FASTBUILD_CMD=go build -ldflags='-s -w -X main.name=timer -X main.version=v1.0.0-dirty -X main.date=$(BUILD_DATE) -X main.commit=12345'
+FASTBUILD_CMD=go build -ldflags='-s -w -X main.name=$(PROJECT_NAME) -X main.version=v1.0.0-dirty -X main.date=$(BUILD_DATE) -X main.commit=12345'
 
 all: dist
 

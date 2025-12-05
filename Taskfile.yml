@@ -2,7 +2,7 @@ version: '3'
 
 vars:
   PROJECT_NAME:
-    sh: bash -c 'git rev-parse --show-toplevel | xargs basename'
+    sh: bash -c 'basename $(pwd)'
   VERSION:
     sh: bash -c 'git describe --tags --always --dirty 2>/dev/null || echo "1.0.0-dev"'
   BUILD_DATE:
