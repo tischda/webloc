@@ -2,7 +2,7 @@
 [![Test Status](https://github.com/tischda/webloc/actions/workflows/test.yml/badge.svg)](https://github.com/tischda/webloc/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/tischda/webloc/badge.svg)](https://coveralls.io/r/tischda/webloc)
 [![Linter Status](https://github.com/tischda/webloc/actions/workflows/linter.yml/badge.svg)](https://github.com/tischda/webloc/actions/workflows/linter.yml)
-[![License](https://img.shields.io/github/license/tischda/webloc)](/LICENSE)
+[![License](https://img.shields.io/github/license/tischda/webloc.svg)](/LICENSE)
 [![Release](https://img.shields.io/github/release/tischda/webloc.svg)](https://github.com/tischda/webloc/releases/latest)
 
 
